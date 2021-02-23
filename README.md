@@ -1,9 +1,4 @@
-
-
-PeopleFlow (www.pplflw.com) is a global HR platform enabling companies to hire & onboard their employees internationally, at the push of a button. It is our mission to create opportunities for anyone to work from anywhere. As work is becoming even more global and remote, there has never been a bigger chance to build a truly global HR-tech company.
-
-
-As a part of our backend engineering team, you will be responsible for building our core platform including an  employees managment system.
+Building our core platform including an  employees managment system.
 
 The employees on this system are assigned to different states, Initially when an employee is added it will be assigned "ADDED" state automatically .
 
