@@ -23,7 +23,7 @@ Your task is to build  Restful API doing the following:
 
 Please provide a solution with the  above features with the following consideration.
 
-- Being simply executable with the least effort Ideally using Docker and docker-compose or any smailiar approach.
+- Being simply executable with the least effort Ideally using Docker and docker-compose or any similar approach.
 - For state machine could be as simple as of using ENUM or by using https://projects.spring.io/spring-statemachine/
 - Please provide testing for your solution.
 - Providing an API Contract e.g. OPENAPI spec. is a big plus

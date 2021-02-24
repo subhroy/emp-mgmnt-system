@@ -1,6 +1,8 @@
 package com.employees.mgmnt.system.controller;
 
-import com.employees.mgmnt.system.dto.EmployeeDTO;
+import com.employees.mgmnt.system.controller.representation.EmployeeRequest;
+import com.employees.mgmnt.system.controller.representation.EmployeeStateRequest;
+import com.employees.mgmnt.system.model.Employee;
 import com.employees.mgmnt.system.service.EmployeeManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,21 +12,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/emp/management/v1")
+@RequestMapping("/emp/management/v1/employees")
 public class EmployeeManagementController {
 
-    @Autowired
-    EmployeeManagementService employeeManagementService;
+  @Autowired EmployeeManagementService employeeManagementService;
 
-    @GetMapping("/employees")
-    public List<EmployeeDTO> getEmployeeDetails(){
-        return employeeManagementService.getAllEmployees();
-    }
+  @GetMapping
+  public List<Employee> getEmployeeDetails() {
+    return employeeManagementService.getAllEmployees();
+  }
 
-    @RequestMapping("/add/emp")
-    @PostMapping
-    public ResponseEntity<EmployeeDTO> addUserToDB(@RequestBody EmployeeDTO employeeDTO){
-        employeeManagementService.addEmployee(employeeDTO);
-        return new ResponseEntity<EmployeeDTO>(employeeDTO, HttpStatus.OK);
-    }
+  @PostMapping("/add")
+  public ResponseEntity<Employee> addEmployee(@RequestBody EmployeeRequest employeeRequest) {
+    return new ResponseEntity<>(
+        employeeManagementService.addEmployee(employeeRequest.toEmployee()), HttpStatus.OK);
+  }
+
+  @PatchMapping("/{empId}")
+  public ResponseEntity<Employee> updateEmployee(
+      @PathVariable long empId, @RequestBody EmployeeStateRequest stateRequest) {
+    return new ResponseEntity<>(
+        employeeManagementService.updateEmployeeState(empId, stateRequest), HttpStatus.OK);
+  }
 }
