@@ -6,13 +6,14 @@ import com.employees.mgmnt.system.model.Employee;
 import com.employees.mgmnt.system.service.EmployeeManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/emp/management/v1/employees")
+@RequestMapping("/emp-management/api/v1/employees")
 public class EmployeeManagementController {
 
   @Autowired EmployeeManagementService employeeManagementService;
@@ -22,16 +23,16 @@ public class EmployeeManagementController {
     return employeeManagementService.getAllEmployees();
   }
 
-  @PostMapping("/add")
+  @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Employee> addEmployee(@RequestBody EmployeeRequest employeeRequest) {
     return new ResponseEntity<>(
-        employeeManagementService.addEmployee(employeeRequest.toEmployee()), HttpStatus.OK);
+        employeeManagementService.addEmployee(employeeRequest.toEmployee()), HttpStatus.CREATED);
   }
 
-  @PatchMapping("/{empId}")
+  @PatchMapping(value = "/{empId}", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Employee> updateEmployee(
       @PathVariable long empId, @RequestBody EmployeeStateRequest stateRequest) {
     return new ResponseEntity<>(
-        employeeManagementService.updateEmployeeState(empId, stateRequest), HttpStatus.OK);
+        employeeManagementService.updateEmployeeState(empId, stateRequest), HttpStatus.NO_CONTENT);
   }
 }
